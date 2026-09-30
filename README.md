@@ -3,7 +3,7 @@
 App de aprendizaje (Flutter / Android) basada en el Contrato N° 008-2025-MML-OGA, el TDR de Supervisión y el Informe Mensual N° 03.
 
 ## Instalar el APK en el celular
-1. En GitHub: pestaña **Actions** → último run de **Build APK** → descargar el artefacto `resolucion-obra-apk` (zip con `app-release.apk`).
+1. En GitHub: sección **Releases** → release **Resolución Obra (APK)** → descargar `resolucion-obra.apk` (también queda como artefacto en Actions).
 2. Pasarlo al celular, abrirlo y permitir "instalar apps de origen desconocido".
 
 ## Compilar localmente

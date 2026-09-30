@@ -6,6 +6,9 @@ on:
     paths-ignore: ['index.html', 'sw.js', 'manifest.json', 'icons/**', '*.md']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   apk:
     runs-on: ubuntu-latest
@@ -27,3 +30,14 @@ jobs:
         with:
           name: resolucion-obra-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Publicar APK en Releases
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk resolucion-obra.apk
+          gh release delete apk-latest --cleanup-tag --yes || true
+          gh release create apk-latest resolucion-obra.apk \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Resolución Obra (APK)" --prerelease \
+            --notes "APK de la última compilación de la rama ${GITHUB_REF_NAME}. Descárgalo desde el celular y ábrelo para instalar."
