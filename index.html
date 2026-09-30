@@ -94,6 +94,27 @@ li{margin:4px 0}.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
 <div class="note">Herramienta educativa, no asesoría legal. Contrasta con el texto oficial vigente y con un abogado de contrataciones públicas.</div>
 </div></section>
 
+<section id="sit">
+<div class="card"><h2>Mi situación: segunda vez bajo 80 %</h2>
+<p class="mut">Línea de tiempo del caso según lo que conoces. Ajusta las fechas y marca lo confirmado.</p>
+<div class="step"><div class="num">1</div><div><b>Setiembre 2026 – 1.ª vez.</b> Ejecutado 6.62 % vs 48.07 % programado (13.8 %). La Supervisión ordena programa acelerado y lo anota en el cuaderno.</div></div>
+<div class="step"><div class="num">2</div><div><b>+7 días:</b> el contratista presenta el programa. <b>+5 días:</b> Supervisión se pronuncia. <b>+7 días hábiles:</b> la Entidad observa o queda aprobado.</div></div>
+<div class="step"><div class="num">3</div><div><b>Octubre 2026 – 2.ª vez.</b> Si el ejecutado acumulado es &lt; 80 % del programado <u>del nuevo calendario</u>: la Supervisión anota e informa a la Entidad.</div></div>
+<div class="step"><div class="num">4</div><div><b>Decisión de la Entidad (sin apercibimiento):</b> intervención económica (art. 208) o resolución.</div></div>
+<h3>Fechas de tu caso</h3>
+<div class="grid"><div><label>Orden del programa acelerado (Setiembre)</label><input id="s0" type="date"></div>
+<div><label>Fecha de corte de la valorización de Octubre</label><input id="s1" type="date"></div></div>
+<button class="btn" onclick="sitf()">Calcular</button>
+<div id="sout"></div>
+<h3>Verificaciones antes de actuar</h3>
+<div id="c3"></div>
+<h3>Si la Entidad elige intervención económica</h3>
+<ul><li>Sustento técnico y económico por escrito (informes de la Supervisión).</li><li>Designar interventor y definir cuentas y pagos de la obra.</li><li>Mantener vigentes las garantías.</li></ul>
+<h3>Si la Entidad elige resolver</h3>
+<ul><li>Formalizar la comunicación al contratista; paralización; acta de constatación física e inventario.</li><li>Ejecutar garantías que correspondan (fiel cumplimiento 28/10/2026: no dejar vencer).</li><li>Resolver antes los pagos de valorizaciones observadas o pendientes, para reducir el riesgo en arbitraje.</li></ul>
+<div class="note">Un tercer programa acelerado no figura en el TDR. Decisión de la Entidad con asesoría legal; esta app es educativa.</div>
+</div></section>
+
 <section id="ruta">
 <div class="card"><h2>3. Ruta paso a paso</h2>
 <div class="step"><div class="num">1</div><div><b>Medición mensual.</b> La Supervisión compara valorización acumulada ejecutada vs. programada. Hoy: 13.8 %.</div></div>
@@ -196,7 +217,7 @@ li{margin:4px 0}.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
 
 </main>
 <script>
-const tabs=[["caso","Caso"],["ley","Marco legal"],["contrato","Contrato"],["ruta","Ruta"],["calc","Calculadoras"],["sim","Simulador"],["quiz","Quiz"],["check","Checklists"],["glos","Glosario"]];
+const tabs=[["caso","Caso"],["sit","Mi situación"],["ley","Marco legal"],["contrato","Contrato"],["ruta","Ruta"],["calc","Calculadoras"],["sim","Simulador"],["quiz","Quiz"],["check","Checklists"],["glos","Glosario"]];
 const nav=document.getElementById('nav');
 function show(id){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));[...nav.children].forEach(b=>b.classList.toggle('on',b.dataset.id===id));scrollTo(0,0);try{localStorage.setItem('rc_tab',id)}catch(e){}}
 tabs.forEach(([id,t])=>{const b=document.createElement('button');b.textContent=t;b.dataset.id=id;b.onclick=()=>show(id);nav.appendChild(b)});
@@ -247,12 +268,19 @@ function sim(i){const z=document.getElementById('simout'),r=document.getElementB
  z.innerHTML=`<div class="card"><p><b>Escenario ${i+1}:</b> ${s.c}</p>`+s.o[r].map((t,k)=>`<button class="opt" data-k="${k}">${t}</button>`).join('')+'<div id="sf"></div></div>';
  z.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{z.querySelectorAll('.opt').forEach((x,k)=>{x.disabled=true;x.classList.add(k===s.ok?'right':(x===b?'wrong':''))});
  document.getElementById('sf').innerHTML=`<div class="fb">${+b.dataset.k===s.ok?'Buena decisión: sigue el debido procedimiento y deja evidencia.':'Decisión riesgosa: genera contingencia legal. La opción correcta quedó marcada.'}</div><button class="btn" onclick="sim(${i+1})">Siguiente</button>`})}
+function sitf(){const a=document.getElementById('s0').value,b=document.getElementById('s1').value;if(!a)return;
+ const f=x=>x.toLocaleDateString('es-PE',{day:'2-digit',month:'short',year:'numeric'});
+ const o=new Date(a+'T12:00:00'),c=new Date(o);c.setDate(c.getDate()+7);const su=new Date(c);su.setDate(su.getDate()+5);const en=addh(su,7);
+ let h=`<div class="card"><p>Programa presentado a más tardar: <b>${f(c)}</b><br>Pronunciamiento Supervisión: <b>${f(su)}</b><br>Plazo de la Entidad para observar: <b>${f(en)}</b> (si no, queda aprobado)</p>`;
+ if(b){const d=new Date(b+'T12:00:00');h+=d>en?'<p class="ok"><b>El corte de Octubre es posterior a la aprobación:</b> se mide contra el nuevo calendario (2.ª vez).</p>':'<p class="warn"><b>El corte de Octubre cae antes de quedar aprobado el programa:</b> probablemente aún se mide contra el calendario original. Confírmalo.</p>'}
+ document.getElementById('sout').innerHTML=h+'</div>'}
+const C3=["El programa acelerado de Setiembre está aprobado (o venció el plazo de 7 días hábiles sin observación)","La orden y las fechas constan en el cuaderno de incidencias","El contratista presentó el programa dentro de los 7 días","La valorización de Octubre se mide contra el nuevo calendario","La Supervisión informó por escrito a la Entidad","Estado de pagos de valorizaciones (Julio, Agosto, Setiembre) revisado","Carta fianza de fiel cumplimiento con renovación exigida (vence 28/10/2026)","Opinión legal y técnica antes de resolver o intervenir"];
 const C1=["Informes de la Supervisión que sustenten el retraso y su imputabilidad","Anotaciones en cuaderno de obra del incumplimiento","Constancia de que se ordenó el calendario acelerado y su resultado","Carta notarial de requerimiento con plazo y apercibimiento","Verificar pagos pendientes de valorizaciones al contratista","Estado y vigencia de las cartas fianza","Cálculo de penalidades aplicadas","Informe legal y opinión técnica de la Oficina de Obras","Plan para continuar la obra (intervención, nuevo contratista)","Acta de constatación física e inventario al resolver"];
 const C2=["Responder las observaciones pendientes (concreto, encofrado, expediente)","Solicitar ampliación de plazo si hay causal, en tiempo y por cuaderno de obra","Presentar el calendario acelerado con recursos reales","Acreditar pagos a proveedores y personal","Renovar cartas fianza antes del vencimiento","Corregir y reingresar la solicitud de adelanto de materiales","Reclamar por escrito el pago de valorizaciones vencidas","Iniciar ya partidas de Arquitectura, Sanitarias y Electrónica (adquisiciones)","Conservar toda evidencia: fotos fechadas, guías, cartas","Asesoría legal especializada en contrataciones públicas"];
 function chk(id,arr,key){let st={};try{st=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
  document.getElementById(id).innerHTML=arr.map((t,i)=>`<label class="chk"><input type="checkbox" ${st[i]?'checked':''} data-i="${i}"><span>${t}</span></label>`).join('');
  document.getElementById(id).onchange=ev=>{st[ev.target.dataset.i]=ev.target.checked;try{localStorage.setItem(key,JSON.stringify(st))}catch(e){}}}
-chk('c1',C1,'rc_c1');chk('c2',C2,'rc_c2');
+chk('c3',C3,'rc_c3');chk('c1',C1,'rc_c1');chk('c2',C2,'rc_c2');
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 let t0='caso';try{t0=localStorage.getItem('rc_tab')||'caso'}catch(e){}show(tabs.some(x=>x[0]===t0)?t0:'caso');
 </script>
