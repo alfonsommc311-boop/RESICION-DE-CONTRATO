@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checklists · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a7 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>✅ Checklists</h1>
+<p class="sub">Tres listas de verificación: para la Entidad antes de decidir, para el contratista que quiere evitar la resolución y para la segunda vez bajo el 80 %. Se guardan en tu dispositivo.</p>
+<div class="warn">Son listas de control del caso; cada contrato tiene requisitos propios. Verificar la norma vigente y el contrato.</div>
+<div id="app"></div>
+<p class="foot">Herramienta formativa, no reemplaza asesoría legal.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script>
+<script>
+(function () {
+  var L = [
+    { id: 'ent', t: '1. Entidad: antes de resolver o intervenir', items: ['Informes de la Supervisión que sustenten el retraso y su imputabilidad.', 'Anotaciones en el cuaderno de incidencias del incumplimiento.', 'Constancia de que se ordenó el programa acelerado y su resultado.', 'Carta notarial de requerimiento (vía general, art. 122) si corresponde.', 'Pagos pendientes de valorizaciones al contratista revisados y regularizados.', 'Estado y vigencia de las cartas fianza; renovación exigida.', 'Cálculo de penalidades aplicadas (mora + otras, tope 10 %).', 'Informe legal y opinión técnica del área de obras.', 'Plan para continuar la obra (intervención o nuevo contratista).', 'Acta de constatación física e inventario si se resuelve.'] },
+    { id: 'con', t: '2. Contratista: para evitar la resolución', items: ['Responder las observaciones pendientes (concreto, encofrado, expediente).', 'Solicitar ampliación de plazo si hay causal, en tiempo y por el cuaderno.', 'Presentar el programa acelerado con recursos reales dentro de los 7 días.', 'Acreditar pagos a proveedores y personal.', 'Renovar las cartas fianza antes del vencimiento.', 'Corregir y reingresar la solicitud de adelanto de materiales.', 'Reclamar por escrito el pago de valorizaciones vencidas.', 'Iniciar adquisiciones de arquitectura, sanitarias y electrónica.', 'Conservar evidencia: fotos fechadas, guías, cartas con acuse.', 'Asesoría legal especializada en contrataciones públicas.'] },
+    { id: 'seg', t: '3. Segunda vez bajo el 80 %', items: ['El programa acelerado está aprobado (o venció el plazo de 7 días hábiles sin observación).', 'La orden y las fechas constan en el cuaderno de incidencias.', 'El contratista presentó el programa dentro de los 7 días.', 'La valorización de octubre se mide contra el nuevo calendario.', 'La Supervisión informó por escrito a la Entidad.', 'Estado de pagos de valorizaciones revisado.', 'Carta fianza de fiel cumplimiento con renovación exigida (vence 28/10/2026).', 'Opinión legal y técnica antes de resolver o intervenir.'] }
+  ];
+  var st = Store.get('chk', {});
+  function draw() {
+    var h = '';
+    L.forEach(function (l) {
+      var ok = 0; l.items.forEach(function (_, i) { if (st[l.id + i]) ok++; });
+      h += '<div class="card"><div class="card-h"><h2>' + l.t + '</h2><span class="lead">' + ok + '/' + l.items.length + '</span></div><div class="bar"><i style="width:' + (100 * ok / l.items.length) + '%"></i></div>';
+      l.items.forEach(function (t, i) { var k = l.id + i; h += '<label class="chk' + (st[k] ? ' on' : '') + '"><input type="checkbox" data-k="' + k + '"' + (st[k] ? ' checked' : '') + '><span>' + Tools.esc(t) + '</span></label>'; });
+      h += '<button class="btn sec" data-r="' + l.id + '">Reiniciar lista</button></div>';
+    });
+    document.getElementById('app').innerHTML = h;
+    var cs = document.querySelectorAll('input[data-k]'), i;
+    for (i = 0; i < cs.length; i++) (function (c) { c.onchange = function () { st[c.getAttribute('data-k')] = c.checked; Store.set('chk', st); draw(); }; })(cs[i]);
+    var bs = document.querySelectorAll('button[data-r]');
+    for (i = 0; i < bs.length; i++) (function (b) { b.onclick = function () { var id = b.getAttribute('data-r'); Object.keys(st).forEach(function (k) { if (k.indexOf(id) === 0) delete st[k]; }); Store.set('chk', st); draw(); }; })(bs[i]);
+  }
+  draw();
+})();
+</script></body></html>

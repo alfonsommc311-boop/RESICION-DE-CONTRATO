@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches: ['**']
-    paths-ignore: ['index.html', 'sw.js', 'manifest.json', 'icons/**', '*.md']
+    paths-ignore: ['*.md', '_brief/**']
   workflow_dispatch:
 
 permissions:
@@ -22,6 +22,11 @@ jobs:
         with:
           channel: stable
           cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validar lecciones
+        run: cd assets/web && node ../../scripts/validate_lessons.js
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test

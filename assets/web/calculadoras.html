@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadoras · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a4 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>🧮 Calculadoras del caso</h1>
+<p class="sub">Precargadas con los datos del informe de setiembre. Cambia los valores y mira qué pasaría el mes siguiente.</p>
+<div class="warn"><b>Ejemplo del caso, no es asesoría.</b> La penalidad usa la fórmula de la cláusula 15 del contrato: 0.10 × monto ÷ (F × plazo). Verificar el monto vigente y el contrato.</div>
+
+<div class="card"><h2>A. Regla del 80 % y penalidad por mora</h2>
+<div class="row"><div><label>Programado acumulado (%)</label><input type="number" id="p" inputmode="decimal" value="48.07"></div><div><label>Ejecutado acumulado (%)</label><input type="number" id="e" inputmode="decimal" value="6.62"></div></div>
+<div class="row"><div><label>Monto vigente (S/)</label><input type="number" id="m" inputmode="decimal" value="15597006.85"></div><div><label>Plazo de obra (días)</label><input type="number" id="d" inputmode="numeric" value="120"></div></div>
+<div class="row"><div><label>Días de atraso a penalizar</label><input type="number" id="dias" inputmode="numeric" value="0"></div><div><label>Otras penalidades ya aplicadas (S/)</label><input type="number" id="otras" inputmode="decimal" value="0"></div></div>
+<div id="a_out"></div></div>
+
+<div class="card"><h2>B. Plazos del programa acelerado</h2>
+<p class="lead">Siete días del contratista, cinco de la Supervisión y siete hábiles de la Entidad (sin feriados).</p>
+<label>Fecha de la orden en el cuaderno de incidencias</label><input type="date" id="f0">
+<div id="b_out"></div></div>
+
+<p class="foot">F del contrato para obras: 0.40 (plazo hasta 60 días), 0.25 (61 a 120), 0.15 (más de 120). Tope: mora + otras penalidades = 10 % del monto vigente. Verificar la norma vigente y el contrato.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script><script src="assets/caso.js"></script>
+<script>
+(function () {
+  function g(id) { var n = parseFloat(document.getElementById(id).value); return isFinite(n) ? n : 0; }
+  function set(id, h) { document.getElementById(id).innerHTML = h; }
+  function A() {
+    var p = g('p'), e = g('e'), m = g('m'), d = Math.round(g('d')), nd = g('dias'), ot = g('otras');
+    var r = Calc.ratio(p, e), bajo = r < 80, diaria = Calc.diaria(m, d), tope = Calc.tope(m);
+    var mora = Math.min(diaria * nd, tope), total = mora + ot, faltan = Math.max(0, p * 0.8 - e);
+    var h = '<div class="bar"><i style="width:' + Math.min(r, 100) + '%"></i></div>';
+    h += '<div class="' + (bajo ? 'warn' : 'good') + '"><b>Ejecutado ÷ programado = ' + r.toFixed(1) + ' %</b> ' + (bajo ? '(bajo el umbral de 80 %). Brecha: ' + (p - e).toFixed(2) + ' puntos.' : '(sobre el umbral).') + '</div>';
+    h += '<p class="lead">Para llegar al 80 % el ejecutado acumulado debería ser <b>' + (p * 0.8).toFixed(2) + ' %</b>: faltan <b>' + faltan.toFixed(2) + ' puntos</b> (≈ ' + Calc.soles(faltan / 100 * m) + ').</p>';
+    h += '<table><tr><th>F</th><td>' + (d > 0 ? Calc.factorF(d) : '-') + '</td></tr><tr><th>Penalidad diaria</th><td>' + Calc.soles(diaria) + '</td></tr><tr><th>Tope 10 %</th><td>' + Calc.soles(tope) + '</td></tr><tr><th>Días de atraso hasta el tope</th><td>~' + Calc.diasHastaTope(m, d, ot) + '</td></tr><tr><th>Mora por ' + Math.round(nd) + ' días</th><td>' + Calc.soles(mora) + '</td></tr><tr><th>Mora + otras</th><td>' + Calc.soles(total) + (m > 0 ? ' (' + (total / m * 100).toFixed(2) + ' %)' : '') + '</td></tr></table>';
+    if (m > 0 && total >= tope) h += '<div class="warn"><b>Tope alcanzado:</b> causal de resolución por incumplimiento (cláusula 15).</div>';
+    set('a_out', h);
+  }
+  function B() {
+    var o = Calc.parse(document.getElementById('f0').value);
+    if (!o) { set('b_out', '<p class="lead">Ingresa la fecha de la orden.</p>'); return; }
+    var p = Calc.plazos(o);
+    set('b_out', '<div class="good">Contratista presenta el programa: <b>' + Calc.fecha(p.contratista) + '</b> (7 días)<br>Supervisión se pronuncia: <b>' + Calc.fecha(p.supervisor) + '</b> (5 días)<br>Entidad puede observar hasta: <b>' + Calc.fecha(p.entidad) + '</b> (7 días hábiles). Si no observa, queda aprobado.</div>');
+  }
+  var defs = { p: A, e: A, m: A, d: A, dias: A, otras: A, f0: B };
+  var saved = Store.get('calc', {});
+  Object.keys(defs).forEach(function (k) { var el = document.getElementById(k); if (saved[k] != null) el.value = saved[k]; el.oninput = function () { saved[k] = el.value; Store.set('calc', saved); defs[k](); }; });
+  A(); B();
+})();
+</script></body></html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contrato y TDR · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a2 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>🖋️ Contrato y TDR</h1>
+<p class="sub">Contrato N° 008-2025-MML-OGA · Procedimiento no competitivo N° 008-2025-MML-OGA-OL · CUI 2702837 · Diseño y Construcción.</p>
+<div class="card"><table>
+<tr><th>Entidad</th><td>Municipalidad Metropolitana de Lima</td></tr>
+<tr><th>Contratista</th><td>Consorcio ejecutor (dos integrantes)</td></tr>
+<tr><th>Monto total</th><td>S/ 12'961,415.86 = diseño S/ 333,434.52 + obra S/ 12'627,981.34 (estimado; se ajusta con el expediente técnico, art. 175.1)</td></tr>
+<tr><th>Plazos</th><td>Diseño 45 días + obra 120 días = 165 días calendario</td></tr>
+<tr><th>Fiel cumplimiento</th><td>S/ 1'296,141.59 (carta fianza CF-00005830), vigente hasta el consentimiento de la liquidación</td></tr>
+<tr><th>Adelanto directo</th><td>30 % del diseño · 10 % de la obra</td></tr>
+<tr><th>Adelanto de materiales</th><td>20 % del monto de obra</td></tr>
+<tr><th>Vicios ocultos</th><td>7 años desde la recepción total</td></tr>
+<tr><th>Conformidad</th><td>Acta de Recepción de Obra</td></tr>
+</table></div>
+<div class="warn"><b>Para cotejar:</b> el informe de setiembre indica obra por S/ 15'597,006.85 y carta fianza N° 15411-1414-2026-000 por S/ 1'631,123.80, distintos al contrato original (probablemente por la aprobación del expediente técnico). Confirma el monto vigente: de él dependen la penalidad y el tope del 10 %.</div>
+<div class="card"><h2>Cláusula 15 – Penalidad por mora</h2><p>Penalidad diaria = 0.10 × monto ÷ (F × plazo). Obras: F = 0.40 (plazo hasta 60 días), <b>0.25</b> (61 a 120 días), 0.15 (más de 120). El retraso se justifica con ampliación de plazo aprobada o acreditando que no es imputable al contratista. Mora + otras penalidades: máximo <b>10 %</b> del monto vigente; al llegar al tope, la Entidad puede resolver por incumplimiento. Se deducen de valorizaciones, pagos, liquidación o de la garantía de fiel cumplimiento.</p></div>
+<div class="card"><h2>Cláusula 16 – Resolución</h2><p>Cualquiera de las partes puede resolver conforme al numeral 68.1 del art. 68 de la Ley 32069, con el procedimiento del art. 122 del Reglamento (D.S. 009-2025-EF). Terminación anticipada (art. 121) si un componente hace innecesaria la continuidad, si el proyecto pierde viabilidad o si no hay presupuesto para financiar la obra.</p></div>
+<div class="card"><h2>TDR de la Supervisión – regla del 80 % (art. 207)</h2><ol><li>Ejecutado acumulado menor al 80 % del programado (o atraso en la ruta crítica): la Supervisión ordena un nuevo programa acelerado y lo anota en el cuaderno.</li><li>Contratista: 7 días. Supervisión: 5 días. Entidad: 7 días hábiles para observar; si no, aprobado.</li><li>No presentarlo a tiempo puede ser causal de intervención económica o resolución.</li><li>Segunda vez, medida contra el nuevo calendario: causal de resolución o intervención económica <b>sin apercibimiento</b>.</li><li>El nuevo programa no sirve para reajustes ni para sustentar ampliaciones de plazo.</li></ol></div>
+<div class="card"><h2>Otras penalidades del componente obra (UIT)</h2>
+<div class="row"><div><label>Buscar</label><input type="search" id="q" placeholder="residente, valorización, cartel…"></div><div><label>Valor de la UIT (S/) – verifica el del año</label><input type="number" id="uit" inputmode="decimal" value="5500"></div></div>
+<div id="pen"></div></div>
+<p class="foot">Herramienta formativa, no reemplaza asesoría legal. Verificar la norma vigente y el contrato.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script><script src="assets/caso.js"></script>
+<script>
+(function () {
+  var P = [['Sustitución de un integrante del plantel técnico por segunda vez', '6 UIT por sustitución', 6], ['No ejecutar con el personal clave/no clave acreditado', '0.5 UIT por personal', 0.5], ['No anotar hechos relevantes en el cuaderno (a más tardar al día siguiente)', '0.1 UIT por día', 0.1], ['No presentar valorizaciones en el plazo', '1 UIT por día de retraso', 1], ['Incumplir el contenido mínimo de valorizaciones', '1 UIT por oportunidad', 1], ['Incumplir conservación y señalización de la obra', '0.3 UIT por día', 0.3], ['Ausencia permanente del Ing. Residente', '0.3 UIT por día', 0.3], ['Ausencia de personal clave y no clave', '0.3 UIT por día y persona', 0.3], ['No presentar el PAC en 10 días desde el acta de inicio', '1 UIT por día', 1], ['No presentar Plan de Manejo Ambiental en 7 días', '1 UIT por día', 1], ['No presentar Plan de Seguridad y Salud en 7 días', '1 UIT por día', 1], ['No presentar cronogramas actualizados en 5 días', '1 UIT por día', 1], ['No dotar de EPP al personal', '0.3 UIT por ocurrencia', 0.3], ['Materiales fuera de especificaciones técnicas', '0.3 UIT por ocurrencia', 0.3], ['No presentar equipos acreditados', '0.3 UIT por ocurrencia y día', 0.3], ['Impago a personal (si la Entidad está al día en pagos)', '0.5 UIT por oportunidad', 0.5], ['No emplear dispositivos de seguridad peatonal/señalización', '1 UIT por oportunidad', 1], ['Profesionales no habilitados en su colegio', '1 UIT por oportunidad', 1], ['No mantener pólizas de seguros vigentes', '0.1 UIT por oportunidad', 0.1], ['Ejecutar partidas sin autorización con obra paralizada', '1 UIT por oportunidad', 1], ['No colocar cartel de obra en 7 días', '1 UIT por oportunidad', 1], ['No presentar planos post construcción, metrados finales y ensayos en 10 días', '1 UIT por día', 1], ['Solicitar recepción sin haber culminado partidas', '0.5 UIT por incidencia', 0.5], ['Prácticas antitécnicas', '0.3 UIT por ocurrencia', 0.3], ['Daños a terceros por mala ejecución', '0.3 UIT por ocurrencia', 0.3], ['Incorrecta eliminación de desmontes', '0.2 UIT por ocurrencia', 0.2], ['Liquidación incompleta, con errores o fuera de plazo', '0.3 UIT por ocurrencia', 0.3]];
+  var q = document.getElementById('q'), u = document.getElementById('uit');
+  var saved = Store.get('uit', null); if (saved) u.value = saved;
+  function draw() {
+    var s = q.value.toLowerCase(), uit = parseFloat(u.value) || 0, h = '<table><tr><th>#</th><th>Supuesto</th><th>Penalidad</th></tr>';
+    P.forEach(function (x, i) { if ((x[0] + ' ' + x[1]).toLowerCase().indexOf(s) < 0) return; h += '<tr><td>' + (i + 1) + '</td><td>' + Tools.esc(x[0]) + '</td><td><b>' + x[1] + '</b><br><span class="lead">≈ ' + Calc.soles(x[2] * uit) + '</span></td></tr>'; });
+    document.getElementById('pen').innerHTML = h + '</table>';
+  }
+  q.oninput = draw; u.oninput = function () { Store.set('uit', u.value); draw(); }; draw();
+})();
+</script></body></html>

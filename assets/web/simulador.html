@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulador · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a8 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>🎭 Simulador por roles</h1>
+<p class="sub">Elige tu rol y decide en tres escenarios del caso. La primera opción correcta queda marcada al responder.</p>
+<div class="card"><label>Rol</label><select id="rol"><option value="ent">Entidad (municipalidad)</option><option value="con">Contratista</option><option value="sup">Supervisión</option></select></div>
+<div id="app"></div>
+<p class="foot">Herramienta formativa, no reemplaza asesoría legal. Verificar la norma vigente y el contrato.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script>
+<script>
+(function () {
+  var S = [
+    { c: 'Octubre 2026. La Supervisión informa: ejecutado acumulado 11 %, programado 70 % del nuevo calendario. Segunda vez bajo el 80 %.', o: { ent: ['Evaluar intervención económica o resolución con el sustento de la Supervisión', 'Ordenar un tercer programa acelerado', 'Ignorar y esperar'], con: ['Acelerar con más personal y cuadrillas, y sustentar por escrito los pagos pendientes', 'Reclamar solo por pagos sin avanzar', 'Abandonar el frente'], sup: ['Anotar en el cuaderno e informar a la Entidad con sustento técnico', 'Callar para no generar conflicto', 'Aprobar la valorización sin revisar'] } },
+    { c: 'La Entidad tiene valorizaciones sin pagar, pero el atraso es muy grande.', o: { ent: ['Regularizar lo valorizado aprobado y luego decidir; evaluar intervención económica', 'Resolver ignorando la deuda', 'Suspender todo pago'], con: ['Sustentar la mora de la Entidad y recuperar ritmo', 'Retirar al personal', 'Apropiarse del adelanto'], sup: ['Emitir informe técnico sobre las causas del atraso', 'Decidir por la Entidad', 'No opinar'] } },
+    { c: 'Falta un mes para el vencimiento de la carta fianza de fiel cumplimiento.', o: { ent: ['Requerir la renovación y preparar la ejecución', 'Dejarla vencer', 'Devolverla'], con: ['Renovarla oportunamente', 'Dejar que la ejecuten', 'Cambiarla por un pagaré'], sup: ['Alertar por escrito a la Entidad', 'Ignorar', 'Retener documentos'] } }
+  ];
+  var i = 0, el = null, rol = document.getElementById('rol');
+  rol.onchange = function () { i = 0; el = null; draw(); };
+  function draw() {
+    var app = document.getElementById('app');
+    if (i >= S.length) { app.innerHTML = '<div class="card"><div class="good">Fin del simulador. Repite con otro rol para ver las tres perspectivas.</div><button class="btn" id="re">Reiniciar</button></div>'; document.getElementById('re').onclick = function () { i = 0; el = null; draw(); }; return; }
+    var s = S[i], ops = s.o[rol.value], h = '<div class="card"><p><b>Escenario ' + (i + 1) + ':</b> ' + Tools.esc(s.c) + '</p>';
+    ops.forEach(function (t, k) { var cls = 'opt'; if (el !== null) cls += k === 0 ? ' ok' : (k === el ? ' bad' : ''); h += '<button class="' + cls + '" data-k="' + k + '"' + (el !== null ? ' disabled' : '') + '>' + Tools.esc(t) + '</button>'; });
+    if (el !== null) h += '<div class="' + (el === 0 ? 'good' : 'warn') + '">' + (el === 0 ? 'Buena decisión: sigue el debido procedimiento y deja evidencia.' : 'Decisión riesgosa: genera contingencia legal. La opción correcta quedó marcada.') + '</div><button class="btn" id="nx">Siguiente</button>';
+    app.innerHTML = h + '</div>';
+    var bs = app.querySelectorAll('button.opt');
+    for (var k = 0; k < bs.length; k++) (function (b) { b.onclick = function () { el = +b.getAttribute('data-k'); draw(); }; })(bs[k]);
+    var nx = document.getElementById('nx'); if (nx) nx.onclick = function () { i++; el = null; draw(); };
+  }
+  draw();
+})();
+</script></body></html>

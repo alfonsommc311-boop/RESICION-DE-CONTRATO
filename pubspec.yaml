@@ -1,22 +1,21 @@
-name: resolucion_contrato
-description: "Aprendizaje: resolución de contrato e intervención económica de obra (Ley 32069)."
+name: resolucion_contrato_pro
+description: "Resolución de Contrato PRO - obra atrasada bajo el 80 %: programa acelerado, penalidades, intervención económica y resolución según la Ley 32069, sin internet."
 publish_to: 'none'
 version: 1.0.0+1
-
 environment:
   sdk: ^3.5.0
-
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.3.0
-
+  flutter_inappwebview: ^6.0.0
+  flutter_tts: ^4.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/web/
+    - assets/web/assets/
+    - assets/web/lessons/

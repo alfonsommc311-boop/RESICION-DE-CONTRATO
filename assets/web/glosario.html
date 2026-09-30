@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glosario · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a5 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>📖 Glosario</h1>
+<p class="sub">Términos de resolución, intervención económica, penalidades y garantías en lenguaje sencillo. Verificar la norma vigente y el contrato.</p>
+<input id="q" type="search" placeholder="Buscar término…" style="width:100%;padding:11px 14px;border-radius:24px;border:1px solid var(--line);background:#0e2242;color:var(--ink);font:inherit">
+<div id="app"></div>
+<p class="foot">Material orientativo, no reemplaza asesoría legal.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script>
+<script>
+(function () {
+  var G = [
+['Acta de constatación física', 'Documento que fija el estado de la obra al momento de resolver el contrato; acompaña al inventario.'],
+['Adelanto directo', 'Pago anticipado al contratista (10 % de la obra en este contrato) que se amortiza en cada valorización.'],
+['Adelanto de materiales', 'Adelanto para materiales, insumos, equipamiento y mobiliario (hasta 20 % del monto de obra en este contrato).'],
+['Ampliación de plazo', 'Mayor plazo aprobado por la Entidad cuando el atraso no es imputable al contratista; se sustenta con el calendario vigente, no con el acelerado.'],
+['Amortización', 'Descuento proporcional del adelanto en cada valorización hasta devolverlo por completo.'],
+['Apercibimiento', 'Advertencia formal de que, si no se cumple en el plazo, se resolverá el contrato. La segunda vez bajo el 80 % no lo exige.'],
+['Arbitraje', 'Mecanismo de solución de controversias en el que un tribunal arbitral decide sobre la resolución u otras diferencias.'],
+['Calendario acelerado', 'Nuevo programa de ejecución con más recursos para recuperar el atraso dentro del plazo previsto.'],
+['Carta fianza', 'Garantía bancaria o de seguros: fiel cumplimiento, adelanto directo o adelanto de materiales. Debe renovarse antes de vencer.'],
+['Carta notarial', 'Comunicación formal con fecha cierta; se usa para requerir el cumplimiento y para comunicar la resolución.'],
+['Causal de resolución', 'Hecho que habilita a una parte a terminar el contrato: incumplimiento injustificado, tope de penalidades, paralización, entre otros.'],
+['Conciliación', 'Vía previa o alternativa al arbitraje para resolver la controversia con un conciliador.'],
+['Cuaderno de incidencias', 'Registro oficial de hechos, órdenes y observaciones de la obra; prueba clave en cualquier controversia.'],
+['Diseño y Construcción', 'Sistema de entrega en que el contratista elabora el expediente técnico y ejecuta la obra.'],
+['Ejecutado acumulado', 'Valorización acumulada realmente ejecutada a la fecha, en porcentaje del monto.'],
+['Factor F', 'Coeficiente de la fórmula de penalidad: 0.40, 0.25 o 0.15 según el plazo de la obra.'],
+['Fiel cumplimiento', 'Garantía que respalda el cumplimiento del contrato; se ejecuta ante incumplimiento o falta de renovación.'],
+['Intervención económica', 'Medida de la Entidad para conducir económicamente la obra y culminarla sin resolver el contrato (art. 208).'],
+['Liquidación', 'Cálculo final de saldos, penalidades, adelantos y garantías al terminar o resolver el contrato.'],
+['Penalidad por mora', 'Descuento diario por atraso injustificado: 0.10 × monto ÷ (F × plazo).'],
+['Programado acumulado', 'Valorización acumulada prevista en el calendario a la fecha, en porcentaje del monto.'],
+['Regla del 80 %', 'Si el ejecutado acumulado es menor al 80 % del programado acumulado, la Supervisión ordena el programa acelerado.'],
+['Resolución', 'Terminación del contrato por incumplimiento u otra causal, siguiendo el procedimiento de la norma.'],
+['Ruta crítica', 'Secuencia de actividades que determina la duración total; un atraso en ella atrasa toda la obra.'],
+['Suma alzada', 'Sistema de pago por monto fijo para metrados e ingeniería definidos.'],
+['Supervisión', 'Consultor que controla la obra por cuenta de la Entidad, mide el avance, anota, ordena e informa.'],
+['Terminación anticipada', 'Fin del contrato sin culpa de las partes: falta de presupuesto, pérdida de viabilidad o componente que hace innecesario el siguiente (art. 121).'],
+['Tope del 10 %', 'Máximo conjunto de mora y otras penalidades; al alcanzarlo, la Entidad puede resolver.'],
+['UIT', 'Unidad Impositiva Tributaria, base de las otras penalidades del contrato; verificar el valor del año.'],
+['Valorización', 'Metrado ejecutado del mes valorizado a precios del contrato; base del pago y de la medición del 80 %.']
+  ];
+  var q = document.getElementById('q');
+  function draw() {
+    var s = q.value.toLowerCase(), h = '';
+    G.forEach(function (g) { if ((g[0] + ' ' + g[1]).toLowerCase().indexOf(s) < 0) return; h += '<div class="term"><b>' + Tools.esc(g[0]) + '</b><p>' + Tools.esc(g[1]) + '</p></div>'; });
+    document.getElementById('app').innerHTML = h || '<p class="lead">Sin resultados.</p>';
+  }
+  q.oninput = draw; draw();
+})();
+</script></body></html>

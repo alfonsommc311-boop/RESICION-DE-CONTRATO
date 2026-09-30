@@ -1,77 +1,132 @@
 import 'package:flutter/material.dart';
-import 'screens/calculadoras.dart';
-import 'screens/caso.dart';
-import 'screens/checklists.dart';
-import 'screens/contrato.dart';
-import 'screens/glosario.dart';
-import 'screens/marco.dart';
-import 'screens/quiz.dart';
-import 'screens/simulador.dart';
-import 'screens/situacion.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
-void main() => runApp(const ResolucionApp());
+// Puerto propio de la app (registro de la familia Experto/PRO) para evitar «Address already in use».
+// Reconfirmar en ports.md antes de compilar: 9053 = Obras por Impuestos PRO.
+const int kServerPort = 9054;
 
-class ResolucionApp extends StatelessWidget {
-  const ResolucionApp({super.key});
+final InAppLocalhostServer _server =
+    InAppLocalhostServer(port: kServerPort, documentRoot: 'assets/web');
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await _server.start();
+  } catch (e) {
+    debugPrint('Servidor local no iniciado: $e');
+  }
+  runApp(const ResolucionContratoProApp());
+}
+
+class ResolucionContratoProApp extends StatelessWidget {
+  const ResolucionContratoProApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Resolución de Contrato',
+        title: 'Resolución de Contrato PRO',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(colorSchemeSeed: const Color(0xFF0B5CAD), useMaterial3: true),
-        darkTheme: ThemeData(colorSchemeSeed: const Color(0xFF0B5CAD), brightness: Brightness.dark, useMaterial3: true),
-        home: const Inicio(),
+        theme: ThemeData.dark(useMaterial3: true),
+        home: const Shell(),
       );
 }
 
-class _Modulo {
-  const _Modulo(this.titulo, this.icono, this.builder);
-  final String titulo;
-  final IconData icono;
-  final Widget Function() builder;
+class Shell extends StatefulWidget {
+  const Shell({super.key});
+  @override
+  State<Shell> createState() => _ShellState();
 }
 
-class Inicio extends StatelessWidget {
-  const Inicio({super.key});
-
-  static final _modulos = <_Modulo>[
-    _Modulo('El caso', Icons.apartment, () => const CasoScreen()),
-    _Modulo('Mi situación', Icons.timeline, () => const SituacionScreen()),
-    _Modulo('Marco legal', Icons.gavel, () => const MarcoScreen()),
-    _Modulo('Contrato y TDR', Icons.description, () => const ContratoScreen()),
-    _Modulo('Calculadoras', Icons.calculate, () => const CalculadorasScreen()),
-    _Modulo('Simulador', Icons.groups, () => const SimuladorScreen()),
-    _Modulo('Quiz', Icons.quiz, () => const QuizScreen()),
-    _Modulo('Checklists', Icons.checklist, () => const ChecklistsScreen()),
-    _Modulo('Glosario', Icons.menu_book, () => const GlosarioScreen()),
-  ];
+class _ShellState extends State<Shell> {
+  InAppWebViewController? _c;
+  final FlutterTts _tts = FlutterTts();
+  double _rate = 0.5;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Resolución de Contrato · Ley 32069'),
-        ),
-        body: SafeArea(
-          child: GridView.count(
-            crossAxisCount: 2,
-            padding: const EdgeInsets.all(12),
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            children: [
-              for (final m in _modulos)
-                Card(
-                  clipBehavior: Clip.antiAlias,
-                  child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => m.builder())),
-                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Icon(m.icono, size: 40, color: Theme.of(context).colorScheme.primary),
-                      const SizedBox(height: 8),
-                      Text(m.titulo, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.w600)),
-                    ]),
-                  ),
-                ),
-            ],
+  void initState() {
+    super.initState();
+    _initTts();
+  }
+
+  Future<void> _initTts() async {
+    // Con awaitSpeakCompletion la lectura de una lección completa avanza sola de parte en parte.
+    await _tts.awaitSpeakCompletion(true);
+    try { await _tts.setLanguage('es-ES'); } catch (_) {}
+    try { await _tts.setSpeechRate(_rate); } catch (_) {}
+    await _tts.setPitch(1.0);
+    _tts.setCompletionHandler(() {
+      _c?.evaluateJavascript(source: "window.__ttsDone && window.__ttsDone();");
+    });
+    _tts.setCancelHandler(() {
+      _c?.evaluateJavascript(source: "window.__ttsDone && window.__ttsDone();");
+    });
+  }
+
+  Future<void> _handleTts(dynamic arg) async {
+    if (arg is! Map) return;
+    final cmd = arg['cmd'];
+    if (cmd == 'stop') {
+      await _tts.stop();
+      return;
+    }
+    if (cmd == 'rate') {
+      final r = double.tryParse('${arg['rate']}');
+      if (r != null) {
+        _rate = r.clamp(0.2, 1.0);
+        try { await _tts.setSpeechRate(_rate); } catch (_) {}
+      }
+      return;
+    }
+    if (cmd == 'speak') {
+      final text = (arg['text'] ?? '').toString();
+      if (text.trim().isEmpty) return;
+      await _tts.stop();
+      try { await _tts.setSpeechRate(_rate); } catch (_) {}
+      try { await _tts.setLanguage('es-ES'); } catch (_) {
+        try { await _tts.setLanguage('es-US'); } catch (_) {}
+      }
+      await _tts.speak(text);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) async {
+          if (didPop) return;
+          await _tts.stop();
+          if (_c != null && await _c!.canGoBack()) {
+            _c!.goBack();
+          } else {
+            SystemNavigator.pop();
+          }
+        },
+        child: Scaffold(
+          backgroundColor: const Color(0xFF0F172A),
+          body: SafeArea(
+            child: InAppWebView(
+              initialUrlRequest:
+                  URLRequest(url: WebUri('http://localhost:$kServerPort/index.html')),
+              initialSettings: InAppWebViewSettings(
+                javaScriptEnabled: true,
+                transparentBackground: true,
+                supportZoom: false,
+              ),
+              onWebViewCreated: (c) {
+                _c = c;
+                c.addJavaScriptHandler(handlerName: 'tts', callback: (args) {
+                  if (args.isNotEmpty) _handleTts(args.first);
+                  return null;
+                });
+              },
+            ),
           ),
         ),
       );
+
+  @override
+  void dispose() {
+    _tts.stop();
+    super.dispose();
+  }
 }

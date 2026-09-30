@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Resolución de Contrato PRO · Obra atrasada: intervenir o resolver</title>
+<meta name="theme-color" content="#0f172a">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="head">
+    <h1>💥 Resolución de Contrato <span class="em">PRO</span></h1>
+    <div class="lead">Una obra pública que cae por debajo del <b>80 %</b> de lo programado, un <b>programa acelerado</b> que no se cumple y una Entidad que debe decidir entre <b>intervención económica</b> y <b>resolución del contrato</b>. Aprende la <b>Ley 32069</b> y su Reglamento aplicados a un caso real: cómo se mide el atraso, qué plazos corren, cuánto vale la <b>penalidad por mora</b>, qué pasa con las <b>cartas fianza</b> y cómo decidir sin perder el arbitraje. Para <b>residentes, supervisores, coordinadores de obra y funcionarios</b>. Con herramientas del caso, fichas, autoevaluación y <b>audio en todo</b>. Funciona sin internet.</div>
+    <div class="chips">
+      <span class="chip">🏗️ Caso real de obra</span>
+      <span class="chip">🔊 Audio en todo</span>
+      <span class="chip">🧪 Autoevaluación por lección</span>
+      <span class="chip">🧰 7 herramientas</span>
+      <span class="chip">📡 Sin internet</span>
+      <span class="chip" id="chip-count">📚 lecciones</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
+      <div class="progress-txt" id="ptxt">Tu progreso</div>
+    </div>
+  </div>
+
+  <nav class="toolbar" id="tools" aria-label="Herramientas"></nav>
+
+  <div class="search"><input id="q" type="search" placeholder="🔎 Buscar tema (80 %, programa acelerado, penalidad, fianza, intervención, carta notarial, cuaderno…)"></div>
+
+  <nav class="toc" id="toc" aria-label="Indice de areas"></nav>
+
+  <div id="home"></div>
+
+  <div class="foot">
+    🎧 <b>Cómo usarla:</b> empieza por <b>El caso</b> y <b>Mi situación</b>, estudia cada área en orden, toca <b>Escuchar lección completa</b> y repasa con audio camino a la obra. Cada lección trae el caso, puntos clave, fichas y un quiz.<br>
+    🧭 <b>Orden recomendado:</b> el caso → marco normativo → retraso y programa acelerado → penalidades y garantías → intervención económica → resolución → actores → decidir bien.<br>
+    🛠️ <b>Herramientas:</b> el caso, mi situación, calculadoras (80 %, penalidad, plazos), contrato y TDR, checklists, simulador por roles y glosario.<br>
+    ⚠️ Esta app es <b>formativa y no reemplaza asesoría legal</b>. Solo se citan con número los artículos confirmados en el contrato y en los términos de referencia: <b>verificar la norma vigente y el contrato</b>. Datos del caso tomados del Informe Mensual N° 03 (setiembre 2026), del Contrato N° 008-2025-MML-OGA y del TDR de Supervisión. Fecha de corte del contenido: 2026-09.<br>
+    Resolución de Contrato PRO v1.0 · Decidir bien cuando la obra se atrasa.
+  </div>
+
+  <script src="assets/catalog.js"></script>
+  <script src="assets/engine.js"></script>
+  <script>
+    (function () {
+      var TOOLS = [
+        { h: 'herramientas.html', t: '🧰 Herramientas' },
+        { h: 'caso.html', t: '🏗️ El caso' },
+        { h: 'situacion.html', t: '🔁 Mi situación' },
+        { h: 'calculadoras.html', t: '🧮 Calculadoras' },
+        { h: 'contrato.html', t: '🖋️ Contrato' },
+        { h: 'checklist.html', t: '✅ Checklists' },
+        { h: 'simulador.html', t: '🎭 Simulador' },
+        { h: 'glosario.html', t: '📖 Glosario' }
+      ];
+      var tb = document.getElementById('tools');
+      TOOLS.forEach(function (x) { var a = document.createElement('a'); a.href = x.h; a.textContent = x.t; tb.appendChild(a); });
+
+      var home = document.getElementById('home');
+      var toc = document.getElementById('toc');
+      var total = 0;
+      CATALOG.forEach(function (a) { total += a.lessons.length; });
+      document.getElementById('chip-count').textContent = '📚 ' + total + ' lecciones';
+
+      var read = Store.get('read', {});
+      var nread = Object.keys(read).filter(function (k) { return read[k]; }).length;
+      var pc = total ? Math.round(nread / total * 100) : 0;
+      document.getElementById('pfill').style.width = pc + '%';
+      document.getElementById('ptxt').textContent = 'Tu progreso · ' + nread + ' de ' + total + ' lecciones (' + pc + '%)';
+
+      CATALOG.forEach(function (a, ai) {
+        var tlink = document.createElement('a');
+        tlink.href = '#area-' + ai; tlink.textContent = a.icon + ' ' + a.area; toc.appendChild(tlink);
+        var sec = document.createElement('div');
+        sec.className = 'section'; sec.id = 'area-' + ai;
+        sec.innerHTML = '<div class="t">' + a.icon + ' ' + a.area + '</div><div class="sdesc">' + a.desc + '</div>';
+        home.appendChild(sec);
+        var grid = document.createElement('div'); grid.className = 'grid';
+        a.lessons.forEach(function (l) {
+          var done = read[l.id];
+          var card = document.createElement('a');
+          card.className = 'card'; card.href = 'lesson.html?l=' + l.id;
+          card.style.setProperty('--acc', 'var(--' + a.acc + ')');
+          card.innerHTML = '<div class="ico">' + l.icon + '</div>' + (done ? '<span class="done">✓ leída</span>' : '') +
+            '<div class="ct">' + l.t + '</div><div class="cd">' + l.d + '</div><div class="go">Aprender →</div>';
+          grid.appendChild(card);
+        });
+        home.appendChild(grid);
+      });
+
+      var q = document.getElementById('q');
+      q.addEventListener('input', function () {
+        var s = q.value.toLowerCase().trim();
+        toc.style.display = s ? 'none' : '';
+        document.querySelectorAll('a.card').forEach(function (c) { c.style.display = (!s || c.textContent.toLowerCase().indexOf(s) >= 0) ? '' : 'none'; });
+        document.querySelectorAll('.section').forEach(function (sec) {
+          var grid = sec.nextElementSibling;
+          var any = [].some.call(grid.querySelectorAll('a.card'), function (c) { return c.style.display !== 'none'; });
+          sec.style.display = any ? '' : 'none'; grid.style.display = any ? '' : 'none';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

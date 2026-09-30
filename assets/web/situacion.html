@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi situación · Resolución de Contrato PRO</title>
+<link rel="stylesheet" href="assets/tools.css"></head>
+<body class="acc-a3 tool">
+<div class="crumb"><a href="herramientas.html">← Herramientas</a></div>
+<h1>🔁 Mi situación: segunda vez bajo el 80 %</h1>
+<p class="sub">Línea de tiempo del caso. Ajusta las fechas y marca lo confirmado; se guarda en tu teléfono.</p>
+<div class="card"><ol>
+<li><b>Setiembre 2026 – primera vez.</b> Ejecutado 6.62 % vs 48.07 % programado (13.8 %). La Supervisión ordena el programa acelerado y lo anota en el cuaderno.</li>
+<li><b>+7 días:</b> el contratista presenta el programa. <b>+5 días:</b> la Supervisión se pronuncia. <b>+7 días hábiles:</b> la Entidad observa o queda aprobado.</li>
+<li><b>Octubre 2026 – segunda vez.</b> Si el ejecutado acumulado es menor al 80 % del programado <b>del nuevo calendario</b>: la Supervisión anota e informa a la Entidad.</li>
+<li><b>Decisión de la Entidad (sin apercibimiento):</b> intervención económica (art. 208) o resolución.</li>
+</ol></div>
+<div class="card"><h2>Fechas de tu caso</h2>
+<div class="row"><div><label>Orden del programa acelerado (setiembre)</label><input type="date" id="s0"></div><div><label>Corte de la valorización de octubre</label><input type="date" id="s1"></div></div>
+<div id="sout"></div></div>
+<div class="card"><h2>Verificaciones antes de actuar</h2><div id="chk"></div></div>
+<div class="card"><h2>Si la Entidad elige intervención económica</h2><ul><li>Sustento técnico y económico por escrito (informes de la Supervisión).</li><li>Designar interventor y definir cuentas y pagos de la obra.</li><li>Mantener vigentes las garantías.</li></ul></div>
+<div class="card"><h2>Si la Entidad elige resolver</h2><ul><li>Formalizar la comunicación al contratista; paralización; acta de constatación física e inventario.</li><li>Ejecutar las garantías que correspondan (fiel cumplimiento vence el 28/10/2026: no dejarla vencer).</li><li>Resolver antes los pagos de valorizaciones pendientes para reducir el riesgo en arbitraje.</li></ul></div>
+<div class="warn">Un tercer programa acelerado no figura en el TDR. La decisión la toma la Entidad con asesoría legal; esta app es formativa.</div>
+<p class="foot">Verificar la norma vigente y el contrato. Los plazos en días hábiles no consideran feriados.</p>
+<script src="assets/catalog.js"></script><script src="assets/engine.js"></script><script src="assets/tools.js"></script><script src="assets/caso.js"></script>
+<script>
+(function () {
+  var st = Store.get('sit', {});
+  var s0 = document.getElementById('s0'), s1 = document.getElementById('s1');
+  if (st.s0) s0.value = st.s0; if (st.s1) s1.value = st.s1;
+  function draw() {
+    var o = Calc.parse(s0.value), c = Calc.parse(s1.value), h = '';
+    if (!o) { document.getElementById('sout').innerHTML = '<p class="lead">Ingresa la fecha de la orden.</p>'; return; }
+    var p = Calc.plazos(o);
+    h += '<div class="good">Programa presentado a más tardar: <b>' + Calc.fecha(p.contratista) + '</b><br>Pronunciamiento de la Supervisión: <b>' + Calc.fecha(p.supervisor) + '</b><br>Plazo de la Entidad para observar: <b>' + Calc.fecha(p.entidad) + '</b> (si no observa, queda aprobado)</div>';
+    if (c) h += c > p.entidad ? '<div class="good"><b>El corte de octubre es posterior a la aprobación:</b> se mide contra el nuevo calendario (segunda vez).</div>' : '<div class="warn"><b>El corte de octubre cae antes de quedar aprobado el programa:</b> probablemente aún se mide contra el calendario original. Confírmalo.</div>';
+    document.getElementById('sout').innerHTML = h;
+  }
+  s0.oninput = s1.oninput = function () { st.s0 = s0.value; st.s1 = s1.value; Store.set('sit', st); draw(); };
+  draw();
+  var items = ['El programa acelerado de setiembre está aprobado (o venció el plazo de 7 días hábiles sin observación)', 'La orden y las fechas constan en el cuaderno de incidencias', 'El contratista presentó el programa dentro de los 7 días', 'La valorización de octubre se mide contra el nuevo calendario', 'La Supervisión informó por escrito a la Entidad', 'Estado de pagos de valorizaciones (julio, agosto, setiembre) revisado', 'Carta fianza de fiel cumplimiento con renovación exigida (vence 28/10/2026)', 'Opinión legal y técnica antes de resolver o intervenir'];
+  var ck = Store.get('chk_sit', {});
+  function drawChk() {
+    var ok = 0; items.forEach(function (_, i) { if (ck[i]) ok++; });
+    var h = '<div class="bar"><i style="width:' + (100 * ok / items.length) + '%"></i></div>';
+    items.forEach(function (t, i) { h += '<label class="chk' + (ck[i] ? ' on' : '') + '"><input type="checkbox" data-k="' + i + '"' + (ck[i] ? ' checked' : '') + '><span>' + Tools.esc(t) + '</span></label>'; });
+    document.getElementById('chk').innerHTML = h;
+    var cs = document.querySelectorAll('#chk input');
+    for (var i = 0; i < cs.length; i++) (function (c) { c.onchange = function () { ck[c.getAttribute('data-k')] = c.checked; Store.set('chk_sit', ck); drawChk(); }; })(cs[i]);
+  }
+  drawChk();
+})();
+</script></body></html>
