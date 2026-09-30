@@ -1,9 +1,19 @@
-# Resolución de Contrato de Obra – Ley 32069 (app instalable)
+# Resolución de Contrato de Obra · Ley 32069
 
-App de aprendizaje (PWA) basada en el Contrato N° 008-2025-MML-OGA, el TDR de Supervisión y el Informe Mensual N° 03.
+App de aprendizaje (Flutter / Android) basada en el Contrato N° 008-2025-MML-OGA, el TDR de Supervisión y el Informe Mensual N° 03.
 
-**Publicar en GitHub Pages:** Settings → Pages → *Deploy from a branch* → elegir la rama y carpeta `/ (root)`.
-**Instalar en el celular:** abrir la URL en Chrome (Android: menú ⋮ → *Instalar aplicación*) o Safari (iPhone: Compartir → *Agregar a pantalla de inicio*).
-Funciona sin internet después de la primera carga.
+## Instalar el APK en el celular
+1. En GitHub: pestaña **Actions** → último run de **Build APK** → descargar el artefacto `resolucion-obra-apk` (zip con `app-release.apk`).
+2. Pasarlo al celular, abrirlo y permitir "instalar apps de origen desconocido".
+
+## Compilar localmente
+```
+flutter pub get
+flutter test
+scripts/build_apk.sh
+```
+
+## Versión web instalable (PWA)
+`index.html` funciona en cualquier navegador y se instala desde Chrome (Instalar aplicación) o Safari (Agregar a pantalla de inicio). Para publicarla: Settings → Pages → Deploy from a branch → carpeta `/ (root)`.
 
 Herramienta educativa; no es asesoría legal.
