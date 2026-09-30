@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resolución de Contrato de Obra – Ley 32069</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--tx:#1d2330;--mut:#5d6677;--pri:#0b5cad;--ok:#1a8f4d;--warn:#c77a00;--bad:#c62828;--bd:#dfe3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#10141b;--card:#1a212c;--tx:#e8ecf3;--mut:#9aa5b8;--pri:#5aa8ff;--ok:#4cc985;--warn:#f0a93a;--bad:#ff6b6b;--bd:#2c3645}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+header{background:var(--pri);color:#fff;padding:18px 16px}header h1{margin:0;font-size:1.25rem}header p{margin:4px 0 0;opacity:.9;font-size:.9rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:5}
+nav button{flex:none;border:1px solid var(--bd);background:var(--bg);color:var(--tx);padding:8px 12px;border-radius:20px;cursor:pointer;font-size:.9rem}
+nav button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+main{max-width:900px;margin:0 auto;padding:14px 16px 60px}section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin:12px 0}
+h2{font-size:1.15rem;margin:.2em 0 .5em}h3{font-size:1rem;margin:.6em 0 .3em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--bg);border-radius:10px;padding:10px;text-align:center}.kpi b{display:block;font-size:1.3rem}.kpi span{font-size:.78rem;color:var(--mut)}
+.bad{color:var(--bad)}.ok{color:var(--ok)}.warn{color:var(--warn)}.mut{color:var(--mut);font-size:.85rem}
+.note{border-left:4px solid var(--warn);background:var(--bg);padding:8px 12px;border-radius:6px;margin:10px 0;font-size:.9rem}
+label{display:block;font-size:.85rem;color:var(--mut);margin:8px 0 2px}input,select{width:100%;padding:9px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:1rem}
+.btn{background:var(--pri);color:#fff;border:0;border-radius:8px;padding:10px 14px;font-size:.95rem;cursor:pointer;margin:4px 4px 4px 0}.btn.sec{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}
+.step{display:flex;gap:12px;margin:0;padding:10px 0;border-bottom:1px dashed var(--bd)}.step:last-child{border:0}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.bar{height:22px;background:var(--bg);border-radius:11px;overflow:hidden;position:relative;margin:6px 0;border:1px solid var(--bd)}.bar i{display:block;height:100%}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);cursor:pointer;font-size:.95rem}
+.opt.right{border-color:var(--ok);background:rgba(26,143,77,.15)}.opt.wrong{border-color:var(--bad);background:rgba(198,40,40,.15)}
+.fb{margin-top:8px;font-size:.9rem;padding:8px 10px;border-radius:8px;background:var(--bg)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}td,th{border-bottom:1px solid var(--bd);padding:6px;text-align:left;vertical-align:top}
+dt{font-weight:700;margin-top:10px}dd{margin:2px 0 0;color:var(--mut)}
+li{margin:4px 0}.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}.chk input{width:auto;margin-top:5px}
+</style>
+</head>
+<body>
+<header><h1>Resolución de Contrato de Obra · Ley 32069</h1>
+<p>Aplicativo de aprendizaje – Caso: Informe Mensual N° 03 (Setiembre 2026), Jr. Ramón Cárcamo / Av. Argentina, Lima</p></header>
+<nav id="nav"></nav>
+<main>
+
+<section id="caso">
+<div class="card"><h2>1. El caso en una mirada</h2>
+<p class="mut">Datos tomados del Informe Mensual N° 03 de la Supervisión (Consorcio Santo Tomás).</p>
+<div class="grid">
+<div class="kpi"><b>S/ 15.60 M</b><span>Monto contratado (suma alzada)</span></div>
+<div class="kpi"><b>120 días</b><span>Plazo · inicio 08/07/2026</span></div>
+<div class="kpi"><b class="ok">48.07 %</b><span>Avance programado acumulado</span></div>
+<div class="kpi"><b class="bad">6.62 %</b><span>Avance ejecutado acumulado</span></div>
+<div class="kpi"><b class="bad">41.45 %</b><span>Atraso (puntos)</span></div>
+<div class="kpi"><b class="bad">13.8 %</b><span>Ejecutado ÷ programado (umbral: 80 %)</span></div>
+</div>
+<div class="note"><b>Lectura clave:</b> el umbral del 80 % se mide como <i>ejecutado acumulado ÷ programado acumulado</i>, no como puntos porcentuales. 6.62 ÷ 48.07 = <b>13.8 %</b>: está muy por debajo del 80 %.</div>
+<h3>Hechos relevantes del informe</h3>
+<ul>
+<li>Sin ampliaciones de plazo ni adicionales aprobados: el atraso no tiene sustento contractual hoy.</li>
+<li>Pagado solo el adelanto directo (S/ 1'559,700.69). Valorizaciones de Julio, Agosto y Setiembre <b>pendientes de pago por la Entidad</b> (Julio observada). Esto es un argumento de defensa del contratista (art. de pago y causal de ampliación/ suspensión): <b>hay que analizarlo</b>.</li>
+<li>La Supervisión califica el desempeño: fallas de gestión del contratista, demoras en pagos a proveedores, desconocimiento del Reglamento.</li>
+<li>Observaciones pendientes de subsanar (concreto sin dosificación controlada, cambio de encofrado sin sustento, etc.).</li>
+<li>Arquitectura, sanitarias y equipamiento electrónico (mayor parte del presupuesto) <b>aún sin iniciar</b>.</li>
+<li><b>Cartas fianza:</b> adelanto directo vencía el <b>28/09/2026</b>; fiel cumplimiento vence el <b>28/10/2026</b>. Si no se renuevan, la Entidad puede ejecutarlas.</li>
+</ul>
+<div class="note">La obra es de la Municipalidad Metropolitana de Lima (Cercado). Si tu referencia es "Malvinas", es la Av. Argentina / Jr. Cárcamo en la zona de Las Malvinas.</div>
+</div></section>
+
+<section id="ley">
+<div class="card"><h2>2. Marco legal (Ley 32069 y su Reglamento, D.S. 009-2025-EF)</h2>
+<dl>
+<dt>Ley 32069, art. 68 – Resolución del contrato</dt><dd>Habilita a la Entidad a resolver por incumplimiento injustificado de obligaciones, por acumular el monto máximo de penalidad por mora u otras penalidades, y por paralización injustificada.</dd>
+<dt>Reglamento, art. 122 – Procedimiento de resolución por incumplimiento</dt><dd>Requerimiento por <b>carta notarial</b> para cumplir, bajo apercibimiento. El plazo otorgado es razonable (entre 10 % y 15 % del plazo vigente); en obras de más de 60 días, hasta <b>15 días</b>. Vencido sin cumplir, se resuelve total o parcialmente con nueva carta notarial.</dd>
+<dt>Reglamento, art. 207 – Resolución de contratos de obras</dt><dd>La resolución determina la paralización inmediata de la obra (salvo razones de seguridad). Se levanta acta de constatación física e inventario, y se liquida el contrato.</dd>
+<dt>Reglamento, art. 208 – Intervención económica de la obra</dt><dd>Medida que la Entidad puede adoptar, de oficio o a pedido, por razones técnicas y económicas, para <b>culminar los trabajos sin resolver el contrato</b>. La Entidad asume la conducción económica de la obra (cuenta, pagos, recursos) con un interventor.</dd>
+<dt>Regla de retraso (80 %)</dt><dd>Si la valorización acumulada ejecutada es menor al <b>80 %</b> de la programada acumulada, la Supervisión ordena un <b>calendario acelerado</b> (7 días para presentarlo). Si vuelve a ocurrir en una valorización posterior, la Entidad puede resolver o reducir trabajos con intervención económica, sin perjuicio de penalidades.</dd>
+<dt>Penalidad por mora (tope 10 %)</dt><dd>Se aplica una penalidad diaria hasta un máximo del 10 % del monto vigente. Al llegar al tope, nace la causal de resolución.</dd>
+</dl>
+<div class="note"><b>Verifica siempre el texto oficial.</b> Este aplicativo es educativo, no es asesoría legal. La numeración exacta de los artículos del Reglamento (sobre todo el de retraso/calendario acelerado) y las modificatorias vigentes en 2026 deben contrastarse con la norma actualizada en el portal del OECE/MEF y con un abogado especialista.</div>
+</div></section>
+
+<section id="ruta">
+<div class="card"><h2>3. Ruta paso a paso: del retraso a la intervención o resolución</h2>
+<div class="step"><div class="num">1</div><div><b>Medición mensual.</b> La Supervisión compara valorización acumulada ejecutada vs. programada. Hoy: 13.8 %.</div></div>
+<div class="step"><div class="num">2</div><div><b>1.ª vez &lt; 80 %: calendario acelerado.</b> La Supervisión anota en el cuaderno de obra y ordena presentar calendario acelerado en 7 días, con recursos adicionales.</div></div>
+<div class="step"><div class="num">3</div><div><b>Aprobación y seguimiento.</b> La Supervisión evalúa el calendario; la Entidad lo aprueba. El contratista debe cumplirlo.</div></div>
+<div class="step"><div class="num">4</div><div><b>2.ª vez &lt; 80 %:</b> la Entidad queda facultada a <b>resolver</b> o a <b>reducir trabajos con intervención económica</b>. También corre la penalidad por mora.</div></div>
+<div class="step"><div class="num">5</div><div><b>Carta notarial de requerimiento</b> (art. 122), con plazo de hasta 15 días, bajo apercibimiento. Debe ser clara y sustentada con informes de Supervisión.</div></div>
+<div class="step"><div class="num">6</div><div><b>Decisión de la Entidad:</b><ul><li><b>Intervención económica</b> (art. 208): el contrato sigue vivo.</li><li><b>Resolución</b>: nueva carta notarial; paralización; constatación física e inventario.</li></ul></div></div>
+<div class="step"><div class="num">7</div><div><b>Ejecución de garantías</b> (fiel cumplimiento y adelanto no amortizado) y <b>liquidación</b> del contrato.</div></div>
+<div class="step"><div class="num">8</div><div><b>Controversias:</b> el contratista puede iniciar conciliación o arbitraje dentro del plazo de caducidad (30 días hábiles para cuestionar la resolución; verificar).</div></div>
+<h3>Resolución vs. intervención económica</h3>
+<table><tr><th></th><th>Intervención económica</th><th>Resolución</th></tr>
+<tr><td>Contrato</td><td>Continúa</td><td>Termina</td></tr>
+<tr><td>Obra</td><td>Sigue ejecutándose</td><td>Se paraliza; nuevo proceso</td></tr>
+<tr><td>Quién conduce</td><td>Entidad (interventor)</td><td>Entidad lo retoma vía liquidación / nuevo contratista</td></tr>
+<tr><td>Ventaja</td><td>Evita perder tiempo</td><td>Corta la relación con el incumplidor</td></tr>
+<tr><td>Riesgo</td><td>Costo de gestión</td><td>Arbitraje, paralización larga</td></tr></table>
+</div></section>
+
+<section id="calc">
+<div class="card"><h2>4. Calculadoras</h2>
+<p class="mut">Precargado con el caso. Puedes cambiar los valores y ver qué pasaría el mes siguiente.</p>
+<div class="grid">
+<div><label>Programado acumulado (%)</label><input id="p" type="number" step="0.01" value="48.07"></div>
+<div><label>Ejecutado acumulado (%)</label><input id="e" type="number" step="0.01" value="6.62"></div>
+<div><label>Monto contratado (S/)</label><input id="m" type="number" step="0.01" value="15597006.85"></div>
+<div><label>Plazo (días calendario)</label><input id="d" type="number" value="120"></div>
+<div><label>Días de atraso a penalizar</label><input id="dias" type="number" value="0"></div>
+</div>
+<button class="btn" onclick="calc()">Calcular</button>
+<div id="out"></div>
+<div class="note">Fórmula de penalidad: <b>10 % × Monto ÷ (F × Plazo)</b>, con F = 0.25 para obras de plazo mayor a 60 días. Tope: 10 % del monto. Es una referencia; en la práctica el monto base es el vigente (con adicionales) y se aplican las reglas del contrato.</div>
+</div></section>
+
+<section id="sim">
+<div class="card"><h2>5. Simulador: ¿qué haría la Entidad?</h2>
+<p class="mut">Elige tu rol y responde en cada escenario.</p>
+<label>Rol</label><select id="rol"><option value="ent">Entidad (MML)</option><option value="con">Contratista</option><option value="sup">Supervisión</option></select>
+<button class="btn" onclick="sim(0)">Iniciar</button>
+<div id="simout"></div>
+</div></section>
+
+<section id="quiz">
+<div class="card"><h2>6. Quiz de repaso</h2>
+<div id="qz"></div>
+</div></section>
+
+<section id="check">
+<div class="card"><h2>7. Listas de verificación</h2>
+<h3>Para la Entidad antes de resolver / intervenir</h3>
+<div id="c1"></div>
+<h3>Para el Contratista que quiere evitarlo</h3>
+<div id="c2"></div>
+<p class="mut">Tu avance se guarda en este navegador.</p>
+</div></section>
+
+<section id="glos">
+<div class="card"><h2>8. Glosario</h2><dl>
+<dt>Valorización</dt><dd>Metrado ejecutado del mes valorizado a precios del contrato; base del pago y de la medición del 80 %.</dd>
+<dt>Calendario acelerado</dt><dd>Nuevo calendario con más recursos para recuperar el atraso en el plazo vigente.</dd>
+<dt>Penalidad por mora</dt><dd>Descuento diario por atraso injustificado, hasta el 10 % del monto.</dd>
+<dt>Intervención económica</dt><dd>La Entidad asume la conducción económica de la obra sin resolver el contrato.</dd>
+<dt>Resolución</dt><dd>Terminación del contrato por incumplimiento, previo requerimiento notarial.</dd>
+<dt>Carta fianza</dt><dd>Garantía bancaria (fiel cumplimiento, adelanto directo, adelanto de materiales).</dd>
+<dt>Cuaderno de obra</dt><dd>Registro oficial de hechos, órdenes y observaciones; prueba clave.</dd>
+<dt>Suma alzada</dt><dd>Sistema de pago por monto fijo para metrados e ingeniería definidos.</dd>
+<dt>Acta de constatación física</dt><dd>Documento que fija el estado de la obra al resolver.</dd>
+<dt>Liquidación</dt><dd>Cálculo final de saldos, penalidades y garantías tras resolver o culminar.</dd>
+</dl></div></section>
+
+</main>
+<script>
+const tabs=[["caso","Caso"],["ley","Marco legal"],["ruta","Ruta"],["calc","Calculadoras"],["sim","Simulador"],["quiz","Quiz"],["check","Checklists"],["glos","Glosario"]];
+const nav=document.getElementById('nav');
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));[...nav.children].forEach(b=>b.classList.toggle('on',b.dataset.id===id));scrollTo(0,0);try{localStorage.setItem('rc_tab',id)}catch(e){}}
+tabs.forEach(([id,t])=>{const b=document.createElement('button');b.textContent=t;b.dataset.id=id;b.onclick=()=>show(id);nav.appendChild(b)});
+const S=v=>'S/ '+v.toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+function calc(){
+ const p=+document.getElementById('p').value,e=+document.getElementById('e').value,m=+document.getElementById('m').value,d=+document.getElementById('d').value,dias=+document.getElementById('dias').value;
+ const r=p?e/p*100:0,gap=p-e,F=d>60?0.25:0.40,diaria=0.10*m/(F*d),tope=0.10*m,pen=Math.min(diaria*dias,tope),dtope=diaria?Math.ceil(tope/diaria):0;
+ const col=r<80?'bad':'ok';
+ document.getElementById('out').innerHTML=`<div class="card"><div class="bar"><i style="width:${Math.min(r,100)}%;background:var(--${col})"></i></div>
+ <p><b class="${col}">Ejecutado ÷ programado = ${r.toFixed(1)} %</b> (umbral 80 %). ${r<80?'<b class="bad">Por debajo del umbral.</b> Atraso: '+gap.toFixed(2)+' puntos.':'<span class="ok">Sobre el umbral.</span>'}</p>
+ <p>Para llegar al 80 % con el programado actual, el ejecutado acumulado debería ser <b>${(p*0.8).toFixed(2)} %</b>: faltan <b>${Math.max(0,p*0.8-e).toFixed(2)} puntos</b> (≈ ${S(Math.max(0,p*0.8-e)/100*m)} sin IGV).</p>
+ <p>Penalidad diaria: <b>${S(diaria)}</b> · Tope 10 %: <b>${S(tope)}</b> · Se alcanza en ~<b>${dtope} días</b>.</p>
+ <p>Penalidad por ${dias} días: <b>${S(pen)}</b> ${dias>=dtope&&dias>0?'<b class="bad">(tope alcanzado → causal de resolución)</b>':''}</p></div>`}
+calc();
+const SC=[
+ {t:"Primera vez que el ejecutado acumulado cae bajo 80 % del programado. ¿Qué corresponde?",o:[["Resolver de inmediato",0,"La resolución exige requerimiento previo y, en esta regla, el camino es primero el calendario acelerado."],["Ordenar calendario acelerado (7 días para presentarlo)",1,"Correcto: es la consecuencia de la primera vez."],["Intervención económica directa",0,"Se reserva para la reiteración o situaciones graves."]]},
+ {t:"El contratista incumple el calendario acelerado y vuelve a estar bajo 80 %. ¿Qué puede hacer la Entidad?",o:[["Resolver el contrato o reducir trabajos con intervención económica",1,"Correcto: es la facultad que se activa en la segunda vez, sin perjuicio de penalidades."],["Nada, debe esperar la liquidación",0,"Incorrecto."],["Solo aplicar penalidad",0,"Además de penalidad, puede resolver o intervenir."]]},
+ {t:"Antes de resolver por incumplimiento, ¿qué documento es indispensable?",o:[["Correo electrónico al residente",0,"No basta."],["Carta notarial de requerimiento con plazo para cumplir",1,"Correcto (art. 122); en obras de más de 60 días hasta 15 días."],["Resolución de alcaldía sin aviso",0,"Se vulnera el debido procedimiento."]]},
+ {t:"La Entidad debe 3 valorizaciones al contratista. ¿Qué debe evaluar antes de resolver?",o:[["Nada, el pago no influye",0,"Sí influye."],["Si el atraso es imputable al contratista o a su propia demora en pagar; riesgo de que la resolución sea declarada ineficaz en arbitraje",1,"Correcto: la mora de la Entidad es el principal argumento de defensa."],["Solo la carta fianza",0,"Es parte, pero no lo único."]]},
+ {t:"Las cartas fianza del caso vencen 28/09 (adelanto) y 28/10/2026 (fiel cumplimiento). ¿Qué hace la Entidad prudente?",o:[["Esperar a que venzan",0,"Perdería la garantía."],["Exigir renovación y, de no renovarse, ejecutarlas antes de su vencimiento",1,"Correcto."],["Devolverlas",0,"Incorrecto mientras haya obligaciones pendientes."]]},
+ {t:"¿Cuál es la diferencia esencial entre intervención económica y resolución?",o:[["Ninguna",0,""],["En la intervención el contrato continúa; en la resolución termina",1,"Correcto."],["La intervención la decide el contratista",0,"La decide la Entidad."]]},
+ {t:"Con 10 % × Monto ÷ (0.25 × 120) y monto S/ 15'597,006.85, la penalidad diaria es:",o:[["S/ 5,199.00",0,""],["S/ 51,990.02",1,"Correcto; el tope del 10 % se alcanza en ~30 días."],["S/ 519,900.23",0,""]]},
+ {t:"¿Qué prueba es más valiosa en un arbitraje?",o:[["Conversaciones verbales",0,""],["Cuaderno de obra, informes de Supervisión, cartas notariales, valorizaciones",1,"Correcto: documentos oficiales y oportunos."],["Fotos sin fecha",0,""]]}
+];
+let qi=0,qs=0;
+function quiz(){const q=SC[qi],z=document.getElementById('qz');
+ if(!q){z.innerHTML=`<h3>Puntaje: ${qs}/${SC.length}</h3><p>${qs>=7?'Excelente.':qs>=5?'Bien, repasa la ruta.':'Repasa el marco legal.'}</p><button class="btn" onclick="qi=0;qs=0;quiz()">Reintentar</button>`;return}
+ z.innerHTML=`<p class="mut">Pregunta ${qi+1} de ${SC.length}</p><h3>${q.t}</h3>`+q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o[0]}</button>`).join('')+'<div id="fb"></div>';
+ z.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const o=q.o[b.dataset.i];z.querySelectorAll('.opt').forEach((x,i)=>{x.disabled=true;x.classList.add(q.o[i][1]?'right':(x===b?'wrong':''))});if(o[1])qs++;
+ document.getElementById('fb').innerHTML=`<div class="fb">${o[2]||(o[1]?'Correcto.':'Incorrecto.')}</div><button class="btn" onclick="qi++;quiz()">Siguiente</button>`})}
+quiz();
+const SIM=[
+ {c:"Octubre 2026. La Supervisión informa: ejecutado acumulado 11 %, programado 70 %. Segunda vez bajo 80 %.",o:{ent:["Enviar carta notarial de requerimiento con 15 días","Resolver sin aviso","Ignorar y esperar"],con:["Presentar calendario acelerado con más personal y cuadrillas","Reclamar solo por pagos pendientes sin avanzar","Abandonar el frente"],sup:["Anotar en cuaderno, informar a la Entidad y recomendar medida","Callar para no generar conflicto","Aprobar la valorización sin revisar"]},ok:0},
+ {c:"Venció el plazo de la carta y no hay mejora. Además la Entidad tiene valorizaciones sin pagar.",o:{ent:["Pagar lo valorizado aprobado y luego decidir; evaluar intervención económica","Resolver ya ignorando la deuda","Suspender todo pago"],con:["Sustentar la mora de la Entidad y recuperar ritmo","Retirar al personal","Apropiarse del adelanto"],sup:["Emitir informe técnico sobre causas del atraso","Decidir por la Entidad","No opinar"]},ok:0},
+ {c:"Falta un mes para el vencimiento de la carta fianza de fiel cumplimiento.",o:{ent:["Requerir renovación y preparar ejecución","Dejarla vencer","Devolverla"],con:["Renovar oportunamente","Dejar que la ejecuten","Cambiarla por un pagaré"],sup:["Alertar por escrito a la Entidad","Ignorar","Retener documentos"]},ok:0}
+];
+function sim(i){const z=document.getElementById('simout'),r=document.getElementById('rol').value,s=SIM[i];
+ if(!s){z.innerHTML='<div class="fb">Fin del simulador. Repite con otro rol para ver las tres perspectivas.</div>';return}
+ z.innerHTML=`<div class="card"><p><b>Escenario ${i+1}:</b> ${s.c}</p>`+s.o[r].map((t,k)=>`<button class="opt" data-k="${k}">${t}</button>`).join('')+'<div id="sf"></div></div>';
+ z.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{z.querySelectorAll('.opt').forEach((x,k)=>{x.disabled=true;x.classList.add(k===s.ok?'right':(x===b?'wrong':''))});
+ document.getElementById('sf').innerHTML=`<div class="fb">${+b.dataset.k===s.ok?'Buena decisión: sigue el debido procedimiento y deja evidencia.':'Decisión riesgosa: genera contingencia legal. La opción correcta quedó marcada.'}</div><button class="btn" onclick="sim(${i+1})">Siguiente</button>`})}
+const C1=["Informes de la Supervisión que sustenten el retraso y su imputabilidad","Anotaciones en cuaderno de obra del incumplimiento","Constancia de que se ordenó el calendario acelerado y su resultado","Carta notarial de requerimiento con plazo y apercibimiento","Verificar pagos pendientes de valorizaciones al contratista","Estado y vigencia de las cartas fianza","Cálculo de penalidades aplicadas","Informe legal y opinión técnica de la Oficina de Obras","Plan para continuar la obra (intervención, nuevo contratista)","Acta de constatación física e inventario al resolver"];
+const C2=["Responder las observaciones pendientes (concreto, encofrado, expediente)","Solicitar ampliación de plazo si hay causal, en tiempo y por cuaderno de obra","Presentar el calendario acelerado con recursos reales","Acreditar pagos a proveedores y personal","Renovar cartas fianza antes del vencimiento","Corregir y reingresar la solicitud de adelanto de materiales","Reclamar por escrito el pago de valorizaciones vencidas","Iniciar ya partidas de Arquitectura, Sanitarias y Electrónica (adquisiciones)","Conservar toda evidencia: fotos fechadas, guías, cartas","Asesoría legal especializada en contrataciones públicas"];
+function chk(id,arr,key){let st={};try{st=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+ document.getElementById(id).innerHTML=arr.map((t,i)=>`<label class="chk"><input type="checkbox" ${st[i]?'checked':''} data-i="${i}"><span>${t}</span></label>`).join('');
+ document.getElementById(id).onchange=ev=>{st[ev.target.dataset.i]=ev.target.checked;try{localStorage.setItem(key,JSON.stringify(st))}catch(e){}}}
+chk('c1',C1,'rc_c1');chk('c2',C2,'rc_c2');
+let t0='caso';try{t0=localStorage.getItem('rc_tab')||'caso'}catch(e){}show(tabs.some(x=>x[0]===t0)?t0:'caso');
+</script>
+</body>
+</html>
