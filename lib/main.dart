@@ -4,8 +4,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 // Puerto propio de la app (registro de la familia Experto/PRO) para evitar «Address already in use».
-// Reconfirmar en ports.md antes de compilar: 9053 = Obras por Impuestos PRO.
-const int kServerPort = 9054;
+// 9053 = Obras por Impuestos PRO, 9054 = JPRD PRO. Reconfirmar en ports.md antes de compilar.
+const int kServerPort = 9055;
 
 final InAppLocalhostServer _server =
     InAppLocalhostServer(port: kServerPort, documentRoot: 'assets/web');

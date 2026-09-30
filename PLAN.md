@@ -8,26 +8,27 @@ Que residentes, supervisores, coordinadores de obra y funcionarios de la Entidad
 |---|---|
 | Nombre visible | Resolución de Contrato PRO |
 | applicationId | `com.alfonso.resolucioncontratopro` |
-| Puerto InAppLocalhostServer | 9054 (reconfirmar en `ports.md`) |
+| Puerto InAppLocalhostServer | 9055 (9054 = JPRD PRO; reconfirmar en `ports.md`) |
 | Prefijo Store | `rcp:` |
 | Clonado de | Obras por Impuestos PRO (shell, motor, validador) |
 
-## 3. Catálogo (8 áreas / 39 lecciones)
-1. El caso y el problema · 2. Marco normativo · 3. Retraso y programa acelerado · 4. Penalidades y garantías · 5. Intervención económica · 6. Resolución del contrato · 7. Actores y decisiones · 8. Decidir bien (integradora, con examen).
+## 3. Catálogo (14 áreas / 75 lecciones)
+1. El caso y el problema · 2. Marco normativo · 3. Retraso y programa acelerado · 4. Penalidades y garantías · 5. Intervención económica · 6. Resolución del contrato · 7. Actores y decisiones · 8. Valorizaciones y control del avance · 9. Ampliaciones, suspensiones y paralización · 10. Diseño y construcción · 11. Calidad, seguridad y observaciones · 12. Después de resolver · 13. Casos resueltos · 14. Decidir bien (integradora, con examen).
 
-## 4. Herramientas del caso
-caso.html (datos e hitos), situacion.html (segunda vez bajo el 80 %: fechas y verificaciones), calculadoras.html (80 %, penalidad con F, plazos 7+5+7 hábiles), contrato.html (cláusulas y 27 penalidades en UIT), checklist.html, simulador.html (por roles), glosario.html.
+## 4. Herramientas (15)
+Del caso: caso, situacion (segunda vez bajo el 80 %), calculadoras (80 %, penalidad con F, plazos 7+5+7 hábiles), contrato (cláusulas y 27 penalidades en UIT), checklist, simulador por roles, glosario.
+Patrón JPRD PRO (`rtools.js`): diagnóstico con semáforo y 3 acciones, ruta con fechas (14 hitos), plazos con feriados del Perú y cronómetro, liquidación preliminar, 9 escritos modelo, simulacro con puntaje (12), banco de 16 casos, perfil del administrador del contrato.
 
 ## 5. Hecho (v1.0)
 - [x] Shell Flutter WebView + TTS, puerto propio, Impeller OFF.
 - [x] Catálogo, motor, validador, guía de redacción y brief con hechos verificados.
-- [x] 39 lecciones (validador en 0 problemas).
-- [x] 7 herramientas con guardado local.
+- [x] 75 lecciones en 14 áreas (validador en 0 problemas).
+- [x] 15 herramientas con guardado local.
+- [x] Ícono propio (glifo `resolucion`, dorado→marrón con sello rojo), íconos adaptativos y splash.
+- [x] Días hábiles con feriados del Perú.
 - [x] Workflow Build APK → release `apk-latest`.
 
 ## 6. Pendiente
 - [ ] Cotejar monto vigente y carta fianza (contrato vs informe) y actualizar valores por defecto.
-- [ ] Feriados en el cálculo de días hábiles.
-- [ ] Ícono propio con `scripts/make_icon.py` + flutter_launcher_icons; firma de release (keystore).
-- [ ] Escritos modelo (carta notarial de requerimiento, solicitud de ampliación, informe de la Supervisión a la Entidad).
-- [ ] Fila en `ports.md` (9054) y `apps_db.py construir && indexar` en la PC del usuario.
+- [ ] Firma de release (keystore).
+- [ ] Fila en `ports.md` (9055, ícono dorado #ca8a04 → #1c1917, glifo contrato partido con sello rojo) y `apps_db.py construir && indexar` en la PC del usuario.

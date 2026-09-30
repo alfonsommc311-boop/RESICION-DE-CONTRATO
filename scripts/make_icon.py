@@ -73,7 +73,26 @@ def draw_municipio(S, accent):
     d.rounded_rectangle([(cx-r*0.32, cy-S*0.012), (cx+r*0.32, cy+S*0.012)], radius=S*0.006, fill=(15, 23, 42, 255))
     return img
 
-GLYPHS = {'robot': draw_robot, 'casco': draw_casco, 'engranaje': draw_engranaje, 'libro': draw_libro, 'municipio': draw_municipio}
+def draw_resolucion(S, accent):
+    """Contrato de obra (hoja con líneas y firma) partido por una grieta, con sello de resolución: Resolución de Contrato PRO."""
+    img = Image.new('RGBA', (S, S), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    x0, y0, x1, y1 = S*0.27, S*0.22, S*0.69, S*0.78
+    d.rounded_rectangle([(x0, y0), (x1, y1)], radius=S*0.03, fill=WHITE)                    # hoja
+    d.polygon([(x1-S*0.10, y0), (x1, y0), (x1, y0+S*0.10)], fill=(200, 205, 220, 255))      # esquina doblada
+    for y in (0.32, 0.39, 0.46, 0.53):                                                      # líneas de texto
+        d.rounded_rectangle([(S*0.33, S*y), (S*0.60, S*(y+0.028))], radius=S*0.01, fill=(160, 170, 195, 255))
+    d.line([(S*0.34, S*0.66), (S*0.40, S*0.62), (S*0.45, S*0.67), (S*0.51, S*0.63)], fill=(60, 70, 100, 255), width=int(S*0.012))  # firma
+    crack = [(S*0.47, y0), (S*0.44, S*0.36), (S*0.50, S*0.47), (S*0.45, S*0.58), (S*0.51, S*0.68), (S*0.48, y1)]
+    d.line(crack, fill=(28, 25, 23, 255), width=int(S*0.018))                                # grieta
+    cx, cy, r = S*0.68, S*0.68, S*0.14                                                       # sello
+    d.ellipse([cx-r, cy-r, cx+r, cy+r], fill=accent)
+    d.ellipse([cx-r*0.78, cy-r*0.78, cx+r*0.78, cy+r*0.78], outline=WHITE, width=int(S*0.012))
+    w = int(S*0.026)
+    d.line([(cx-r*0.38, cy-r*0.38), (cx+r*0.38, cy+r*0.38)], fill=WHITE, width=w)
+    d.line([(cx-r*0.38, cy+r*0.38), (cx+r*0.38, cy-r*0.38)], fill=WHITE, width=w)
+    return img
+
+GLYPHS = {'robot': draw_robot, 'casco': draw_casco, 'engranaje': draw_engranaje, 'libro': draw_libro, 'municipio': draw_municipio, 'resolucion': draw_resolucion}
 
 def main():
     ap = argparse.ArgumentParser()

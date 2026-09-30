@@ -1,0 +1,39 @@
+Lesson.start({
+  id: 'obra-inconclusa-y-lecciones', area: 'Después de resolver', areaIcon: '🔚', icon: '🏚️',
+  title: 'Obra inconclusa y lecciones',
+  subtitle: 'La resolución es un medio, no un fin: el objetivo sigue siendo que la central de seguridad ciudadana funcione.',
+  norma: 'Liquidación conforme al artículo 215 del Reglamento de la Ley 32069 y garantía de fiel cumplimiento vigente hasta el consentimiento de la liquidación (cláusula 8); las reglas sobre obras paralizadas y su reactivación deben verificarse en la norma vigente y el contrato.',
+  intro: '<p>Muchas obras públicas quedan paralizadas años después de resolverse el contrato: la liquidación se entrampa, el saldo no se contrata, el presupuesto se reasigna y el terreno termina abandonado. Esta lección cierra el área con dos preguntas: <b>cómo evitar que la obra del caso quede inconclusa</b> y <b>qué aprender</b> para que el siguiente contrato no repita la historia de un avance de 6.62 % frente a 48.07 % programado.</p>',
+  sections: [
+    { h: 'Cómo una obra resuelta se convierte en obra abandonada',
+      html: '<ol><li>Se resuelve sin plan del saldo.</li><li>La constatación se demora o queda incompleta.</li><li>La liquidación se vuelve controversia y todo espera al arbitraje.</li><li>La garantía de fiel cumplimiento no se renueva ni se ejecuta, y la Entidad pierde respaldo.</li><li>El presupuesto del año se revierte o se reasigna.</li><li>La obra se deteriora y el saldo ya no es el mismo: hay que rehacer el expediente.</li></ol><p>Cada paso alimenta al siguiente. Romper la cadena exige actuar en paralelo: <b>constatar, custodiar, liquidar y preparar el saldo al mismo tiempo</b>, sin esperar a que termine el arbitraje.</p>' },
+    { h: 'La liquidación no debe detener el saldo',
+      html: '<p>La liquidación del artículo 215 define las cuentas con el contratista resuelto; el saldo define cómo se termina la obra. Son procesos <b>relacionados pero distintos</b>. Esperar a que la liquidación quede consentida o a que termine un arbitraje para recién contratar el saldo puede significar años.</p><p>Lo que sí debe cuidarse: que la <b>garantía de fiel cumplimiento</b> se mantenga vigente hasta el consentimiento de la liquidación (cláusula 8). En el caso, la fianza de fiel cumplimiento vence el <b>28/10/2026</b>; si el contratista no la renueva, la cláusula 9 y el artículo 118 permiten ejecutarla. Ese seguimiento no puede quedar en el aire mientras se discuten las cuentas. Las reglas específicas sobre obras paralizadas y su reactivación deben <b>verificarse en la norma vigente y el contrato</b>.</p>' },
+    { h: 'Presupuesto y continuidad institucional',
+      html: '<ul><li><b>Asegurar el presupuesto</b> del saldo en la programación del año siguiente; el equipamiento electrónico, la mayor parte del presupuesto, no puede quedar sin financiamiento.</li><li><b>Documentar el estado del proyecto</b> para que un cambio de gestión o de equipo no obligue a empezar de cero.</li><li><b>Mantener informada a la población</b> y a las áreas usuarias sobre el estado y el plan de culminación.</li><li><b>Designar un responsable institucional</b> del proyecto hasta su recepción final.</li></ul><p>Una obra inconclusa rara vez se debe a una sola mala decisión; casi siempre es una suma de pendientes sin dueño.</p>' },
+    { h: 'Lecciones del caso para el siguiente contrato',
+      html: '<table><tr><th>Lo que pasó</th><th>Lección</th></tr><tr><td>Razón ejecutado ÷ programado de 13.8 % al tercer mes</td><td>Medir desde el primer mes y actuar apenas se cruza el 80 %, no cuando el atraso es irreversible</td></tr><tr><td>Vaciados sin control ni procedimiento aprobado</td><td>Exigir protocolos y presencia de la Supervisión antes de cada vaciado</td></tr><tr><td>Valorizaciones impagas por la Entidad</td><td>Pagar u observar con sustento en plazo: el impago debilita cualquier resolución</td></tr><tr><td>Fianza de adelanto con vencimiento en plena crisis</td><td>Llevar un calendario de garantías con alertas previas</td></tr><tr><td>Componentes críticos sin iniciar (equipamiento)</td><td>Controlar la ruta crítica y las adquisiciones de largo plazo, no solo el avance global</td></tr><tr><td>Desempeño deficiente reportado por la Supervisión</td><td>Evaluar capacidad técnica y financiera real en la selección</td></tr></table>' },
+    { h: 'Cerrar el ciclo: recepción y memoria institucional',
+      html: '<p>El éxito no es haber resuelto el contrato, sino <b>recibir la obra terminada</b> con el nuevo contratista y que el servicio de seguridad ciudadana funcione. Al cerrar, conviene elaborar un <b>informe de lecciones aprendidas</b>: qué alertas se vieron, cuándo se actuó, qué costó el atraso, qué se recuperó vía penalidades, garantías y daños (cl. 17).</p><p>Ese informe no busca culpables; busca que el próximo equipo reconozca antes las mismas señales. Esta lección es formativa y no reemplaza asesoría legal sobre las decisiones concretas del caso.</p>' }
+  ],
+  keypoints: [
+    'Una obra resuelta sin plan de saldo, custodia ni presupuesto tiende a quedar abandonada.',
+    'Constatar, custodiar, liquidar y preparar el saldo se hace en paralelo, no en secuencia.',
+    'La liquidación (art. 215) y el saldo son procesos distintos: uno no debe paralizar al otro.',
+    'La garantía de fiel cumplimiento debe seguir vigente hasta el consentimiento de la liquidación (cl. 8).',
+    'La lección central del caso: medir desde el primer mes y actuar apenas la razón cae bajo el 80 %.',
+    'El objetivo final es la obra terminada y el servicio funcionando, no la resolución en sí.'
+  ],
+  flashcards: [
+    { q: '¿Por qué no conviene esperar a que termine la liquidación para contratar el saldo?', a: 'Porque la liquidación puede terminar en arbitraje y tomar años; son procesos distintos y el saldo puede avanzar en paralelo.' },
+    { q: '¿Hasta cuándo debe estar vigente la garantía de fiel cumplimiento?', a: 'Hasta el consentimiento de la liquidación, según la cláusula 8 del contrato.' },
+    { q: '¿Qué lección deja la razón de 13.8 % al tercer mes?', a: 'Que el control del avance debe hacerse desde el primer mes y actuar apenas se cae bajo el 80 %.' },
+    { q: '¿Para qué sirve un informe de lecciones aprendidas?', a: 'Para que el siguiente equipo reconozca antes las señales de alerta; no busca culpables.' }
+  ],
+  quiz: [
+    { q: 'La Entidad decide esperar el laudo arbitral sobre la liquidación antes de preparar el saldo. El principal riesgo es:', opts: ['Que la obra quede paralizada por años y se deteriore', 'Que el contratista gane automáticamente', 'Ninguno, es lo que exige la norma'], correct: 0, why: 'Liquidación y saldo son procesos distintos; secuenciarlos prolonga la paralización.' },
+    { q: 'La fianza de fiel cumplimiento vence el 28/10/2026 y la liquidación aún no está consentida. Lo correcto es:', opts: ['Dejarla vencer porque el contrato ya se resolvió', 'Devolverla al contratista', 'Exigir su renovación y, si no se renueva, evaluar su ejecución con asesoría legal'], correct: 2, why: 'Debe mantenerse vigente hasta el consentimiento de la liquidación; la cláusula 9 permite ejecutarla por falta de renovación.' },
+    { q: '¿Cuál es el verdadero indicador de éxito tras resolver el contrato?', opts: ['Haber impuesto la máxima penalidad', 'Recibir la obra terminada y que el servicio funcione', 'Ganar el arbitraje'], correct: 1, why: 'La resolución es un medio; el fin es la obra al servicio de la población.' },
+    { q: 'Un componente crítico (equipamiento electrónico) seguía sin iniciar. La lección para el próximo contrato es:', opts: ['Controlar solo el porcentaje global de avance', 'Controlar la ruta crítica y las adquisiciones de largo plazo desde el inicio', 'Postergar el equipamiento hasta el final siempre'], correct: 1, why: 'El avance global puede ocultar que los componentes de mayor peso y plazo no han empezado.' }
+  ]
+});

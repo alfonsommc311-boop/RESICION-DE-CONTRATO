@@ -57,3 +57,29 @@ details.pl>summary{font-weight:700;cursor:pointer}
 .audiobar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
 .audiobar .btn{margin:0}.speed{display:flex;align-items:center;gap:6px;color:var(--mut);flex:1;min-width:150px}.speed input{flex:1}
 .speaking{outline:2px solid var(--coral);box-shadow:0 0 0 4px rgba(242,177,52,.18)}
+
+/* ===== Herramientas del caso (rtools.js), mismo patrón que JPRD PRO ===== */
+#tool input,#tool select,#tool textarea{width:100%;font:inherit;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:#0e2242;color:var(--ink);min-height:44px;margin:2px 0}
+#tool textarea{min-height:70px}
+#tool label{display:block;font-weight:600;margin:10px 0 3px;font-size:.9rem}
+#tool input[type=checkbox]{width:22px;height:22px;min-height:0;display:inline-block;vertical-align:middle}
+#tool .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#tool .btn.alt{background:transparent;color:var(--coral);border:1.5px solid var(--coral)}
+#tool .btn.sm{padding:6px 12px;font-size:.85rem}
+#tool .tag{cursor:pointer;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:99px;font:inherit;font-size:.9rem}
+#tool .tag.on{background:var(--coral);color:#1a0d08;border-color:var(--coral)}
+#tool .opt{display:block;padding:10px;border:1.5px solid var(--line);border-radius:10px;margin:6px 0;background:#0e2242;cursor:pointer;font-weight:400;color:var(--ink)}
+#tool label.opt{display:flex;gap:10px;align-items:flex-start}
+#tool .opt.sel{border-color:var(--coral)}
+#tool .opt.right{border-color:#2bb673;background:rgba(43,182,115,.15)}
+#tool .opt.wrong{border-color:#ff5c6c;background:rgba(255,92,108,.14)}
+#tool .sem{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;margin-right:6px}
+#tool .sem.g{background:#2bb673}#tool .sem.y{background:#ffb020}#tool .sem.r{background:#ff5c6c}
+#tool .tot{font-size:1.35rem;font-weight:700;color:var(--coral);margin:8px 0}
+#tool .mut{color:var(--mut)}
+#tool .box{border-left:4px solid var(--coral);background:var(--card);padding:8px 12px;border-radius:0 10px 10px 0;margin:10px 0}
+#tool .box.err{border-color:#ff5c6c}#tool .box.ok{border-color:#2bb673}
+#tool pre.out{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font:.85rem/1.5 ui-monospace,monospace}
+#tool td input{min-height:36px;padding:5px}
+@media print{.crumb,.foot,.btn{display:none}}
+#tool .pill{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin:0 4px 6px 0}
